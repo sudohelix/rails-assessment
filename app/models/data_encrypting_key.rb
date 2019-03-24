@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DataEncryptingKey < ActiveRecord::Base
 
   attr_encrypted :key,
@@ -9,12 +11,11 @@ class DataEncryptingKey < ActiveRecord::Base
     find_by(primary: true)
   end
 
-  def self.generate!(attrs={})
+  def self.generate!(attrs = {})
     create!(attrs.merge(key: AES.key))
   end
 
   def key_encrypting_key
-    ENV['KEY_ENCRYPTING_KEY']
+    ENV["KEY_ENCRYPTING_KEY"]
   end
 end
-

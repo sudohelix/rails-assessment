@@ -1,8 +1,9 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class EncryptedStringTest < ActiveSupport::TestCase
 
-  test 'Missing tests! Please fix' do
-
+  test "Missing tests! Please fix" do
   end
 end

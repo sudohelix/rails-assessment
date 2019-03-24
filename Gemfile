@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '2.5.3'
@@ -48,5 +50,5 @@ group :development do
   gem 'spring'
 end
 
-gem "attr_encrypted", "~> 3.0.0"
 gem "aes"
+gem "attr_encrypted", "~> 3.0.0"

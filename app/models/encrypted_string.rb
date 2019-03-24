@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class EncryptedString < ActiveRecord::Base
+
   belongs_to :data_encrypting_key
 
   attr_encrypted :value,
@@ -24,9 +27,10 @@ class EncryptedString < ActiveRecord::Base
   end
 
   def set_token
-    begin
+    loop do
       self.token = SecureRandom.hex
-    end while EncryptedString.where(token: self.token).present?
+      break if EncryptedString.where(token: token).blank?
+    end
   end
 
   def set_data_encrypting_key

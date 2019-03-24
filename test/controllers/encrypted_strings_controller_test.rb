@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class EncryptedStringsControllerTest < ActionController::TestCase
 
@@ -8,7 +10,7 @@ class EncryptedStringsControllerTest < ActionController::TestCase
 
   test "POST #create saves new EncryptedString" do
     assert_difference "EncryptedString.count" do
-      post :create, encrypted_string: { value: "to encrypt"}
+      post :create, encrypted_string: { value: "to encrypt" }
     end
 
     assert_response :success
@@ -19,7 +21,7 @@ class EncryptedStringsControllerTest < ActionController::TestCase
 
   test "POST #create returns invalud when value does not exist" do
     assert_no_difference "EncryptedString.count" do
-      post :create, encrypted_string: {value: nil}
+      post :create, encrypted_string: { value: nil }
     end
 
     assert_response :unprocessable_entity
@@ -46,7 +48,6 @@ class EncryptedStringsControllerTest < ActionController::TestCase
 
   test "delete #destroy removes the token from the database" do
     @encrypted_string = EncryptedString.create!(value: "value to destroy")
-
 
     assert_difference "EncryptedString.count", -1 do
       post :destroy, token: @encrypted_string.token

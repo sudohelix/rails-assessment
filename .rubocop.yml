@@ -1,0 +1,65 @@
+Style/Documentation:
+  Enabled: No
+
+Metrics/LineLength:
+  Max: 133
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  Exclude:
+    - 'config/application.rb'
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/schema.rb'
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: beginning_only
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: compact
+  EnforcedStyleForEmptyBraces: no_space
+
+Style/SymbolArray:
+  MinSize: 3
+  EnforcedStyle: percent
+
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - 'db/schema.rb'
+
+Layout/ExtraSpacing:
+  AllowBeforeTrailingComments: true
+  Exclude:
+    - 'bin/setup'
+
+Style/ExpandPathArguments:
+  Exclude:
+    - 'Rakefile'
+    - 'bin/bundle'
+    - 'bin/rails'
+    - 'bin/rake'
+    - 'bin/setup'
+
+# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
+# SupportedStyles: single_quotes, double_quotes
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'config.ru'
+    - 'bin/setup'
+    - 'bin/spring'
+    - 'bin/bundle'
+    - 'bin/rake'
+    - 'bin/rails'
+    - 'db/schema.rb'
+
+Layout/EmptyLineAfterMagicComment:
+  Exclude:
+    - 'db/schema.rb'
+
+Style/Encoding:
+  Exclude:
+    - 'db/schema.rb'
