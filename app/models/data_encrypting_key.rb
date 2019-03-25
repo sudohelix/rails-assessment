@@ -16,6 +16,6 @@ class DataEncryptingKey < ApplicationRecord
   end
 
   def key_encrypting_key
-    ENV["KEY_ENCRYPTING_KEY"]
+    Rails.application.secrets.key_encrypting_key
   end
 end
