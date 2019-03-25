@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EncryptedString < ActiveRecord::Base
+class EncryptedString < ApplicationRecord
 
   belongs_to :data_encrypting_key
 

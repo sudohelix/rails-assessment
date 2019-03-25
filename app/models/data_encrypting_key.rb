@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DataEncryptingKey < ActiveRecord::Base
+class DataEncryptingKey < ApplicationRecord
 
   attr_encrypted :key,
                  key: :key_encrypting_key

@@ -10,7 +10,7 @@ class EncryptedStringsControllerTest < ActionController::TestCase
 
   test "POST #create saves new EncryptedString" do
     assert_difference "EncryptedString.count" do
-      post :create, encrypted_string: { value: "to encrypt" }
+      post :create, params: { encrypted_string: { value: "to encrypt" }}
     end
 
     assert_response :success
@@ -21,7 +21,7 @@ class EncryptedStringsControllerTest < ActionController::TestCase
 
   test "POST #create returns invalud when value does not exist" do
     assert_no_difference "EncryptedString.count" do
-      post :create, encrypted_string: { value: nil }
+      post :create, params: { encrypted_string: { value: nil }}
     end
 
     assert_response :unprocessable_entity
@@ -32,7 +32,7 @@ class EncryptedStringsControllerTest < ActionController::TestCase
   test "get #show returns the decrypted value" do
     @encrypted_string = EncryptedString.create!(value: "decrypted string")
 
-    get :show, token: @encrypted_string.token
+    get :show, params: { token: @encrypted_string.token }
 
     assert_response :success
 
@@ -41,7 +41,7 @@ class EncryptedStringsControllerTest < ActionController::TestCase
   end
 
   test "get #show returns 404 for invalid token" do
-    get :show, token: "does not exist"
+    get :show, params: { token: "does not exist" }
 
     assert_response :not_found
   end
@@ -50,14 +50,14 @@ class EncryptedStringsControllerTest < ActionController::TestCase
     @encrypted_string = EncryptedString.create!(value: "value to destroy")
 
     assert_difference "EncryptedString.count", -1 do
-      post :destroy, token: @encrypted_string.token
+      post :destroy, params: { token: @encrypted_string.token }
     end
 
     assert_response :success
   end
 
   test "delete #destroy returns 404 for invalid token" do
-    delete :destroy, token: "does not exist"
+    delete :destroy, params: { token: "does not exist" }
 
     assert_response :not_found
   end
