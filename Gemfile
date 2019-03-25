@@ -67,3 +67,6 @@ end
 
 gem "aes"
 gem "attr_encrypted", "~> 3.0.0"
+gem "interactor", "~> 3.1.1"
+gem "mocha", "~> 1.8.0"
+gem "sidekiq", "5.2.5"
