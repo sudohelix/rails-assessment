@@ -6,7 +6,7 @@ class EncryptedString < ApplicationRecord
 
   attr_encrypted :value,
                  mode: :per_attribute_iv_and_salt,
-                 key: :really_long_encryption_thing_that_probably_shoud_be_renamed
+                 key: :primary_encryption_key
 
   validates :token, presence: true, uniqueness: true
   validates :data_encrypting_key, presence: true
@@ -14,7 +14,7 @@ class EncryptedString < ApplicationRecord
 
   before_validation :set_token, :set_data_encrypting_key
 
-  def really_long_encryption_thing_that_probably_shoud_be_renamed
+  def primary_encryption_key
     self.data_encrypting_key ||= DataEncryptingKey.primary
     data_encrypting_key.encrypted_key
   end
