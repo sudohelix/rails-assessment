@@ -11,3 +11,6 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+require "mocha/minitest"
+Mocha::Configuration.prevent(:stubbing_non_existent_method)

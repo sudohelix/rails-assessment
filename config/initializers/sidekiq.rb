@@ -1,4 +1,3 @@
 # frozen_string_literal: true
 
-module DataEncryptingKeys
-end
+require "sidekiq/api"
