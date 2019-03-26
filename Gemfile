@@ -63,10 +63,12 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem "mocha", "~> 1.8.0"
 end
 
 gem "aes"
 gem "attr_encrypted", "~> 3.0.0"
 gem "interactor", "~> 3.1.1"
-gem "mocha", "~> 1.8.0"
 gem "sidekiq", "5.2.5"
+gem "webpacker", "~> 4.0.2"
+gem "react-rails", "~> 2.4.7"

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :encrypted_strings, param: :token, only: %i[create show destroy] do
-  end
+  root to: "static#index"
+
+  resources :encrypted_strings, param: :token, only: %i[create show destroy]
 
   scope :data_encrypting_keys do
     resource :rotate, controller: "rotations", as: "rotations", only: :create do
