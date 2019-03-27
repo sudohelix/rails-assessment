@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_223952) do
+ActiveRecord::Schema.define(version: 2019_03_27_224406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_223952) do
     t.boolean "primary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_key_iv", default: "f", null: false
+    t.index ["encrypted_key_iv"], name: "index_data_encrypting_keys_on_encrypted_key_iv", unique: true
   end
 
   create_table "encrypted_strings", force: :cascade do |t|

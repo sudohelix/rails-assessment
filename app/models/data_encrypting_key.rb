@@ -3,6 +3,7 @@
 class DataEncryptingKey < ApplicationRecord
 
   attr_encrypted :key,
+                 mode: :per_attribute_iv_and_salt,
                  key: :key_encrypting_key
 
   validates :key, presence: true
