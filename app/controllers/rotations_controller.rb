@@ -6,11 +6,19 @@ class RotationsController < ApplicationController
     result = ::CreateKeyRotationsJobOrganizer.call
 
     if result.success?
-      render json: ["OK"], status: :ok
+      render json: { message: t("rotations.errors.job_queued") }, status: :ok
     else
       render json: { message: result.message }, status: result.status
     end
   end
 
-  def status; end
+  def status
+    result = Rotations::FindInProgressRotation.call
+
+    if result.success?
+      render json: { message: t("rotations.status.none_queued") }, status: :ok
+    else
+      render json: { message: t(result.message) }, status: result.status
+    end
+  end
 end

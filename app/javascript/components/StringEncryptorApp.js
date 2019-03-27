@@ -4,6 +4,7 @@ import _bindAll from "lodash.bindall";
 
 import DecryptStringForm from "./DecryptStringForm";
 import EncryptStringForm from "./EncryptStringForm";
+import KeyRotationForm from "./KeyRotationForm";
 import SimpleList from "./SimpleList";
 import StorageService from "../services/storage_service";
 import { ShowIf } from "../helpers/component_helpers";
@@ -20,7 +21,6 @@ export default class StringEncryptorApp extends React.Component {
     _bindAll(this, [
       "storeToken",
       "selectToken",
-      "reEncryptStrings",
       "deleteEncryptedString"
     ]);
   }
@@ -41,7 +41,7 @@ export default class StringEncryptorApp extends React.Component {
           action={this.listAction()}
         />
         <ShowIf condition={haveTokens}>
-          <button onClick={this.reEncryptStrings}>Re-encrypt Strings</button>
+          <KeyRotationForm />
           <DecryptStringForm selectedToken={selectedToken} />
           <button
             onClick={this.deleteEncryptedString}
@@ -62,10 +62,6 @@ export default class StringEncryptorApp extends React.Component {
     const storedTokens = this.storageService.get("tokens");
     return !!storedTokens ? storedTokens.split(",") : [];
   }
-
-  reEncryptStrings = () => {
-    alert("please implement");
-  };
 
   listAction() {
     return {

@@ -13,7 +13,8 @@ class RotationsControllerTest < ActionDispatch::IntegrationTest
     post rotations_url
     body = JSON.parse(response.body)
 
-    assert_includes body, "OK", "response must have ok status"
+    assert_includes body.keys, "message"
+    assert_includes body.values, "Key rotation has been queued"
   end
 
   test "#status should get" do
