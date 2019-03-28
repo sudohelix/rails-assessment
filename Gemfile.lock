@@ -126,6 +126,9 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    oj (3.7.11)
+    panko_serializer (0.5.9)
+      oj (~> 3.7.0)
     pg (0.21.0)
     public_suffix (3.0.3)
     puma (3.12.1)
@@ -254,6 +257,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mocha (~> 1.8.0)
+  panko_serializer
   pg (~> 0.21)
   puma
   rails (~> 5.2.2)

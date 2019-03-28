@@ -68,6 +68,7 @@ end
 gem "aes"
 gem "attr_encrypted", "~> 3.0.0"
 gem "interactor", "~> 3.1.1"
+gem "panko_serializer"
 gem "react-rails", "~> 2.4.7"
 gem "sidekiq", "5.2.5"
 gem "webpacker", "~> 4.0.2"

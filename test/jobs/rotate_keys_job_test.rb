@@ -41,4 +41,14 @@ class RotateKeysJobTest < ActiveJob::TestCase
     end
     assert_not_equal DataEncryptingKey.primary, old_primary_encrypting_key
   end
+
+  test "orphaned encryption keys are deleted and replace with the new primary key" do
+    non_primary_key = DataEncryptingKey.generate!
+    encrypted_string = EncryptedString.create(value: Faker::Company.bs, data_encrypting_key: non_primary_key)
+
+    assert_changes -> { encrypted_string.reload.data_encrypting_key_id } do
+      RotateKeysJob.new.perform
+    end
+    assert_equal DataEncryptingKey.primary.id, encrypted_string.data_encrypting_key_id
+  end
 end

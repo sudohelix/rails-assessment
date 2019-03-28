@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
   root to: "static#index"
 
   resources :encrypted_strings, param: :token, only: %i[create show destroy]

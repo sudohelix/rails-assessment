@@ -19,7 +19,10 @@ class Rotations::FindInProgressRotation < BaseInteractor
   end
 
   def running_jobs?
-    @running_jobs ||= Sidekiq::Workers.new.any? { |_, _, work| work["queue"] == queue_name && work["payload"]["class"] == job_type }
+    @running_jobs ||= Sidekiq::Workers.new.any? do |_, _, work|
+      Rails.logger.info "HEREE"
+      work["queue"] == queue_name && work["payload"]["class"] == job_type
+    end
   end
 
   def job_queue

@@ -9,6 +9,7 @@ import SimpleList from "./SimpleList";
 import StorageService from "../services/storage_service";
 import { ShowIf } from "../helpers/component_helpers";
 import { destroyEncryptedString } from "../services/http/encrypted_strings";
+import { rotationStatus } from "../services/http/rotations";
 
 export default class StringEncryptorApp extends React.Component {
   constructor(props) {
@@ -19,10 +20,16 @@ export default class StringEncryptorApp extends React.Component {
       tokens: this.storedTokens
     };
     _bindAll(this, [
+      "getRemoteTokens",
       "storeToken",
       "selectToken",
-      "deleteEncryptedString"
+      "deleteEncryptedString",
+      "storeTokens"
     ]);
+  }
+
+  componentDidMount() {
+    this.getRemoteTokens();
   }
 
   render() {
@@ -41,7 +48,7 @@ export default class StringEncryptorApp extends React.Component {
           action={this.listAction()}
         />
         <ShowIf condition={haveTokens}>
-          <KeyRotationForm />
+          <KeyRotationForm afterRotationComplete={this.storeTokens} />
           <DecryptStringForm selectedToken={selectedToken} />
           <button
             onClick={this.deleteEncryptedString}
@@ -69,6 +76,16 @@ export default class StringEncryptorApp extends React.Component {
       func: this.selectToken
     };
   }
+
+  getRemoteTokens = async () => {
+    try {
+      const response = await rotationStatus();
+      const tokens = response.data.tokens.flatMap(t => t["token"]);
+      this.storeTokens(tokens);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   selectToken = token => {
     return evt => {
@@ -111,6 +128,16 @@ export default class StringEncryptorApp extends React.Component {
         this.storageService.set("tokens", remainingTokens);
       });
     }
+  };
+
+  storeTokens = tokens => {
+    this.setState(
+      {
+        tokens,
+        selectedToken: ""
+      },
+      () => this.storageService.set("tokens", tokens)
+    );
   };
 }
 

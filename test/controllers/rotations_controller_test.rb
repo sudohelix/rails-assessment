@@ -66,6 +66,15 @@ class RotationsControllerTest < ActionDispatch::IntegrationTest
     assert_includes body["message"], "No key rotation queued or in progress"
   end
 
+  test "#status should return tokens if there are no queued jobs" do
+    encrypted_string = EncryptedString.create!(value: "test value")
+    get status_rotations_url
+    body = JSON.parse(response.body)
+
+    assert_response :success
+    assert_includes body["tokens"].flat_map(&:values), encrypted_string.token
+  end
+
   test "#status should return unprocessable entity with a message if there is a job queued" do
     Sidekiq::Queue.expects(:new).returns(mock(size: 1, any?: true))
 

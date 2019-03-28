@@ -21,9 +21,9 @@ export default class EncryptStringForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={stringToEncrypt} onChange={this.handleInput}
+        <input id="encrypt-string-input" type="text" value={stringToEncrypt} onChange={this.handleInput}
                placeholder="Type String to Encrypt Here..."/>
-        <input type="submit" value="Encrypt" disabled={stringToEncrypt.length === 0 || submitting}/>
+        <input id="encrypt-string-button" type="submit" value="Encrypt" disabled={stringToEncrypt.length === 0 || submitting}/>
       </form>
     );
   }

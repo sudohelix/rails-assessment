@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_002144) do
     t.boolean "primary", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "encrypted_key_iv", default: "f", null: false
+    t.string "encrypted_key_iv"
     t.index ["encrypted_key_iv"], name: "index_data_encrypting_keys_on_encrypted_key_iv", unique: true
   end
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_002144) do
     t.string "encrypted_value"
     t.string "encrypted_value_iv"
     t.string "encrypted_value_salt"
-    t.integer "data_encrypting_key_id"
+    t.bigint "data_encrypting_key_id"
     t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -8,14 +8,14 @@ class RotateKeysJob < ApplicationJob
 
   def perform(*_args)
     DataEncryptingKey.transaction do
-      DataEncryptingKey.where(primary: true).find_each do |key|
-        key.update(primary: false)
-      end
+      DataEncryptingKey.primary.update(primary: false)
       new_key = DataEncryptingKey.generate!(primary: true)
+
       EncryptedString.includes(:data_encrypting_key).find_each do |string|
+        # default batch size of 1000
         string.rekey!(new_key)
       end
+      DataEncryptingKey.where.not(id: new_key.id).destroy_all
     end
-    DataEncryptingKey.where(primary: false).destroy_all
   end
 end
