@@ -9,7 +9,9 @@ class DataEncryptingKey < ApplicationRecord
   validates :primary, exclusion: [nil]
 
   def self.primary
-    find_by(primary: true)
+    where(primary: true).first_or_create! do |key|
+      key.assign_attributes(key: AES.key)
+    end
   end
 
   def self.generate!(attrs = {})

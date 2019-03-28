@@ -19,6 +19,16 @@ class EncryptedString < ApplicationRecord
     data_encrypting_key.encrypted_key
   end
 
+  def rekey!(new_key)
+    return if encrypted_value_iv.blank? || encrypted_value.blank?
+
+    old_value = value
+
+    # You have to set the old encrypted_mail value
+    # to nil before you can force a re-encrypt
+    update(encrypted_value: nil, value: old_value, data_encrypting_key_id: new_key.id)
+  end
+
   private
 
   def encryption_key
