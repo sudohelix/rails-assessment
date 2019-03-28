@@ -4,6 +4,12 @@ Rails:
 Style/Documentation:
   Enabled: No
 
+AllCops:
+  Exclude:
+    - "node_modules/**/*"
+    - "bin/**/*"
+    - "db/schema.rb"
+
 Metrics/LineLength:
   Max: 133
 
@@ -59,7 +65,7 @@ Style/StringLiterals:
     - 'bin/rails'
     - 'db/schema.rb'
 
-Layout/EmptyLineAfterMagicComment:
+Style/FrozenStringLiteralComment:
   Exclude:
     - 'db/schema.rb'
 

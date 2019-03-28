@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateEncryptedStrings < ActiveRecord::Migration
+class CreateEncryptedStrings < ActiveRecord::Migration[5.2]
 
   def change
     create_table :encrypted_strings do |t|

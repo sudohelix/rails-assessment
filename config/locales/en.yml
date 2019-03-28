@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  rotations:
+    errors:
+      job_queued: "Key rotation has been queued"
+      running_jobs: "Key rotation is in progress"
+    status:
+      none_queued: "No key rotation queued or in progress"

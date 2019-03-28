@@ -10,27 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_07_18_202445) do
+ActiveRecord::Schema.define(version: 2019_03_28_002144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "data_encrypting_keys", force: :cascade do |t|
     t.string "encrypted_key"
-    t.boolean "primary"
+    t.boolean "primary", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_key_iv"
+    t.index ["encrypted_key_iv"], name: "index_data_encrypting_keys_on_encrypted_key_iv", unique: true
   end
 
   create_table "encrypted_strings", force: :cascade do |t|
     t.string "encrypted_value"
     t.string "encrypted_value_iv"
     t.string "encrypted_value_salt"
-    t.integer "data_encrypting_key_id"
+    t.bigint "data_encrypting_key_id"
     t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["data_encrypting_key_id"], name: "index_encrypted_strings_on_data_encrypting_key_id"
+    t.index ["encrypted_value_iv"], name: "index_encrypted_strings_on_encrypted_value_iv", unique: true
     t.index ["token"], name: "index_encrypted_strings_on_token"
   end
 

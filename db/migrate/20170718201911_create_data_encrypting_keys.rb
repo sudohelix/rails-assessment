@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateDataEncryptingKeys < ActiveRecord::Migration
+class CreateDataEncryptingKeys < ActiveRecord::Migration[5.2]
 
   def change
     create_table :data_encrypting_keys do |t|

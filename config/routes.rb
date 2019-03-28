@@ -1,7 +1,18 @@
 # frozen_string_literal: true
 
+require "sidekiq/web"
+
 Rails.application.routes.draw do
-  resources :encrypted_strings, param: :token
+  mount Sidekiq::Web => "/sidekiq"
+  root to: "static#index"
+
+  resources :encrypted_strings, param: :token, only: %i[create show destroy]
+
+  scope :data_encrypting_keys do
+    resource :rotate, controller: "rotations", as: "rotations", only: :create do
+      get "status", on: :member
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
