@@ -61,6 +61,8 @@ group :test do
   gem 'chromedriver-helper'
   gem "faker"
   gem "mocha", "~> 1.8.0"
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
 end
 
 gem "aes"

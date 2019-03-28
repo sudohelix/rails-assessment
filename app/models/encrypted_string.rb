@@ -9,7 +9,6 @@ class EncryptedString < ApplicationRecord
                  key: :primary_encryption_key
 
   validates :token, presence: true, uniqueness: true
-  validates :data_encrypting_key, presence: true
   validates :value, presence: true
 
   before_validation :set_token, :set_data_encrypting_key
@@ -24,7 +23,7 @@ class EncryptedString < ApplicationRecord
 
     old_value = value
 
-    # You have to set the old encrypted_mail value
+    # You have to set the old encrypted value
     # to nil before you can force a re-encrypt
     update(encrypted_value: nil, value: old_value, data_encrypting_key_id: new_key.id)
   end
@@ -38,8 +37,8 @@ class EncryptedString < ApplicationRecord
 
   def set_token
     loop do
-      self.token = SecureRandom.hex
-      break if EncryptedString.where(token: token).blank?
+      self.token = SecureRandom.uuid
+      break unless EncryptedString.where(token: token).exists?
     end
   end
 
